@@ -9,7 +9,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import axios from 'axios';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,10 +30,10 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(2)
   },
 }));
-async function App() {
+ function Login() {
   const [msg, setmsg] = useState("");
   const classes = useStyles();
-  function submit(e){
+  async function submit(e){
     e.preventDefault();
     let res = await axios.post('/api/auth', {
         data: {
@@ -41,7 +41,7 @@ async function App() {
             password: e.target.password.value
         }
       })
-    if(res.date==="valid"){
+    if(res.data==="valid"){
       setmsg('Valid User')
     }else{
       setmsg('Invalid User')
@@ -117,4 +117,4 @@ async function App() {
   );
 }
 
-export default App;
+export default Login;
