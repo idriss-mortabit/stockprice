@@ -1,8 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var http = require('http');
+const bcrypt = require('bcrypt');
+const Joi = require('joi');
+const mongoose = require('mongoose');
 
-const uri = "mongodb+srv://dev:ZA2gTldJTz4LrTxq@cluster0.13cbv.mongodb.net/trendindi?retryWrites=true&w=majority";
+const uri = "mongodb+srv://idriss:Va2lG0RNx3nOeCbd@cluster0.l8uax.mongodb.net/trendindi?retryWrites=true&w=majority";
 mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -60,7 +63,7 @@ router.post('/api/auth',async(req,res) =>{
       response = {data :"valid"}
       res.send(response);
   }
-
+})
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../../client/build/index.html'));

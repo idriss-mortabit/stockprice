@@ -26,12 +26,12 @@ class PS12 extends React.Component {
         <div className="row">
             <div className="col-12">
                 <h2>Closing price</h2>
-                {this.state.apiData.data.length()<4 ? (<p>one of the days you intered is a holiday</p>):(<p></p>)}
+                {this.state.apiData.data.length<4 ? (<p>one of the days you intered is a holiday</p>):(<p></p>)}
                 <ul>
                 {
                 this.state.apiData.data.map((stock)=>{
                     return(
-                    <li>on {stock.date.slice(10)} the closing price of {stock.symbol} was {stock.close}</li>
+                    <li>on {stock.date.slice(0,10)} the closing price of {stock.symbol} was {stock.close}</li>
                     )
                 })}
                 </ul>
