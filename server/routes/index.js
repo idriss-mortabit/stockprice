@@ -46,21 +46,26 @@ router.post('/api/auth',async(req,res) =>{
       username : Joi.string().required().email(),
       userpassword : Joi.string().required()
   }
-  console.log(req.body.username);
+  console.log(req.body.data.username);
   // const {error} = Joi.validate(req.body, schema);
   // if(error){
   //      res.locals = {error :"Invalid Username or Password"}
      // return res.redirect(301, '/admin/login');
   // }
-  console.log(req.body.password);
-  let user = await Admin.findOne({Email: req.body.username})
-  let chechPassword = await bcrypt.compare(req.body.userpassword, user.Password);
-  if(!user || !chechPassword){
-        response = {data :"invalid"}
-        res.send(response);
+  console.log(req.body.data.password);
+  let user = await Admin.findOne({Email: req.body.data.username})
+  if(user){
+    chechPassword = await bcrypt.compare(req.body.data.password, user.Password);
+    if(!chechPassword){
+      response = {data :"valid"}
+      res.send(response);
+}else{
+  response = {data :"invalid"}
+  res.send(response);
+}
   }
   else{
-      response = {data :"valid"}
+      response = {data :"invalid"}
       res.send(response);
   }
 })
